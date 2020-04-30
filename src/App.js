@@ -24,7 +24,7 @@ class App extends Component {
       user: this.state.user
     }
     return (
-      <div>
+      <div className="App">
         <BrowserRouter>
         <CbBkContext.Provider value={contextValue}>
 

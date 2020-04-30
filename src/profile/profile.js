@@ -1,13 +1,15 @@
 import React, {Component, Fragment} from 'react';
+import {Link} from 'react-router-dom';
 import Recipe from '../recipe/recipe';
-import AddRecipe from '../recipe/addrecipe';
 
 class Profile extends Component {
     render() {
         return (
             <Fragment>
                 <h1>Hello from dashboard</h1>
-                <AddRecipe />
+                <Link to="/addrecipe">
+                    Add Recipe
+                </Link>
                 <Recipe />
             </Fragment>
         )
