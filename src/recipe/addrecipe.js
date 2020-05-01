@@ -7,16 +7,12 @@ class AddRecipe extends Component {
         super(props);
         this.state = {
             name: '',
-            ingredients: [{
-                name: '',
-                qty: Number,
-                measurement: '',
-                specialInstructions: ''
-            }],
+            ingredients: [],
             directions: [],
             prepTime: "",
             cookTime: "",
-            servingSize: ""
+            servingSize: "",
+            disabled: false
         }
     }
 
@@ -38,19 +34,26 @@ class AddRecipe extends Component {
         })
     }
 
-    handleInputChange = (e, i) => {
-        const { name, value } = e.target;
-        let ingredients = [...this.state.ingredients];
-        ingredients[i] = { ...ingredients[i], [name]: value };
+    handleIngredients = (e) => {
         this.setState({
-            ingredients
-        });
+            ingredients: e.currentTarget.value.split(/\r?\n/)
+        })
     }
 
     handleDirections = (event) => {
         this.setState({
             directions: event.currentTarget.value.split(/\r?\n/)
         })    
+    }
+
+    handleClick = () => {
+        this.setState({
+            disabled: true
+        })
+    }
+
+    handleSubmit = () => {
+        alert('Submitted your recipe!')
     }
 
     render() {
@@ -61,12 +64,16 @@ class AddRecipe extends Component {
                 <form>
                     {this.createIngredientForm
                     }
-                    <RecipeService.CreateIngredientForm
-                    ingredients={this.state.ingredients}
-                    handleInputChange={this.handleInputChange}/>
+
                     
                     <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize}/>
-                    <textarea onChange={this.handleDirections} />
+
+                    <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" />
+                    <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line"/>
+
+                    <button type="submit" onClick={(e) => {this.handleClick(); this.handleSubmit(e)}}>
+                        {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
+                    </button>
                 </form>
             </section>
         )

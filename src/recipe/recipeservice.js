@@ -6,47 +6,47 @@ const RecipeService = {
         return (
             <Fragment>
                 <label>
-                    <input type="text" onInput={props.setPrepTime} />
+                    <input type="text" onInput={props.setPrepTime} placeholder="Prep Time"/>
                 </label>
     
                 <label>
-                    <input type="text" onInput={props.setCookTime}/>
+                    <input type="text" onInput={props.setCookTime} placeholder="Cook Time"/>
                 </label>
     
                 <label>
-                    <input type="text" onInput={props.setServingSize} />
+                    <input type="text" onInput={props.setServingSize} placeholder="Serving Size"/>
                 </label>
             </Fragment>
         )
     },
     
-    CreateIngredientForm(props) {
-        return props.ingredients.map((_, i) => (
-            i += 1, //eslint-disable-line
-        <div key={i}>
+    // CreateIngredientForm(props) {
+    //     return props.ingredients.map((_, i) => (
+    //         i += 1, //eslint-disable-line
+    //     <div key={i}>
     
-          <label>
-            <input type="text" name="name" onInput={e => props.handleInputChange(e, i)} placeholder="Name"/>
-          </label>
+    //       <label>
+    //         <input type="text" name="name" onInput={e => props.handleInputChange(e, i)} placeholder="Name"/>
+    //       </label>
     
-          <label>
-            <input type="number" name="qty" onInput={e => props.handleInputChange(e, i)} placeholder="Qty"/>
-          </label>
+    //       <label>
+    //         <input type="number" name="qty" onInput={e => props.handleInputChange(e, i)} placeholder="Qty"/>
+    //       </label>
     
-          <select name="measurement" onChange={e => props.handleInputChange(e, i)}>
-            <option value="NA">No Specific Amount</option>
-            <option value="Ounces">Ounces</option>
-            <option value="Pounds">Pounds</option>
-            <option value="Cup">Cup</option>
-            <option value="Teaspoon">Teaspoon</option>
-            <option value="Tablespoon">Tablespoon</option>
-          </select>
+    //       <select name="measurement" onChange={e => props.handleInputChange(e, i)}>
+    //         <option value="NA">No Specific Amount</option>
+    //         <option value="Ounces">Ounces</option>
+    //         <option value="Pounds">Pounds</option>
+    //         <option value="Cup">Cup</option>
+    //         <option value="Teaspoon">Teaspoon</option>
+    //         <option value="Tablespoon">Tablespoon</option>
+    //       </select>
     
-          <label>
-            <input type="text" name="specialInstructions" onInput={e => props.handleInputChange(e, i)} placeholder="Special Instructions" />
-          </label>
-      </div>
-        ))
-    }
+    //       <label>
+    //         <input type="text" name="specialInstructions" onInput={e => props.handleInputChange(e, i)} placeholder="Special Instructions" />
+    //       </label>
+    //   </div>
+    //     ))
+    // }
 }
 export default RecipeService
