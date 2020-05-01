@@ -48,19 +48,21 @@ class Recipe extends Component {
         return (
             <Fragment>
                 <Nav />
-                <h1>{recipe.recipeName}</h1>
+                <section>
+                    <h1>{recipe.recipeName}</h1>
 
-                <p>Prep Time: <span>{recipe.prepTime}</span></p>
+                    <p>Prep Time: <span>{recipe.prepTime}</span></p>
 
-                <p>Cook Time: <span>{recipe.cookTime}</span></p>
+                    <p>Cook Time: <span>{recipe.cookTime}</span></p>
 
-                <p>Serving Size: <span>{recipe.servingSize}</span></p>
+                    <p>Serving Size: <span>{recipe.servingSize}</span></p>
 
-                <h3>Ingredients</h3>
-                {renderIngredientList(recipe.ingredients)}
+                    <h3>Ingredients</h3>
+                    {renderIngredientList(recipe.ingredients)}
 
-                <h3>Directions</h3>
-                {renderDirections(recipe.directions)}
+                    <h3>Directions</h3>
+                    {renderDirections(recipe.directions)}
+                </section>
 
             </Fragment>
         )
