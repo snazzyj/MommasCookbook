@@ -11,7 +11,7 @@ const recipes = [
   {
     id: 1,
     recipeName: 'Stuffed Red Pepper Vegan Style',
-    ingrediants : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
+    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
     directions: ["Preheat oven to 350 degrees", "Add onions and green peppers into red pepper", "Put red peppers into oven for 30 minutes"],
     prepTime: '15 Minutes',
     cookTime: '30 Minutes',
@@ -20,7 +20,7 @@ const recipes = [
   {
     id: 2,
     recipeName: 'Leynas special',
-    ingrediants : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
+    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
     directions: ["Preheat oven to 350 degrees", "Place chicken in a pan with the onions and peppers", "Wait 5 minutes before serving"],
     prepTime: '10 minutes',
     cookTime: '20 minutes',
@@ -29,7 +29,7 @@ const recipes = [
   {
     id: 3,
     recipeName: 'Double Whoops',
-    ingrediants : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
+    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
     directions: ["Put olive into pan with the stove on high", "Mix your chicken in with the salt and pepper", "Put the onions and green peppers into the pan", "place chicken into pan with the veggies"],
     prepTime: '10 minutes',
     cookTime: '15 minutes',
@@ -44,15 +44,28 @@ class App extends Component {
     this.state = {
       user : {
         id: 0,
+        firstName: 'Alex',
         isLoggedIn: true,
         recipeData: recipes
       }
     }
   }
 
+  setUserLogout = () => {
+    this.setState({
+      user: {
+        id: 0,
+        firstName: '',
+        isLoggedIn: false,
+        recipeData: []
+      }
+    })
+  }
+
   render() {
     const contextValue = {
-      user: this.state.user
+      user: this.state.user,
+      setUserLogout: this.setUserLogout
     }
     return (
       <div className="App">
