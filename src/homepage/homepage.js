@@ -3,11 +3,11 @@ import Profile from '../profile/profile';
 import Login from '../login/login';
 import SignUp from '../signup/signup';
 import Nav from '../nav/nav';
-import CbBkContext from '../ckbkcontext';
+import CkBkContext from '../ckbkcontext';
 
 class Homepage extends Component {
 
-    static contextType = CbBkContext;
+    static contextType = CkBkContext;
 
     render() {
 

@@ -17,42 +17,53 @@ class AddRecipe extends Component {
         }
     }
 
+    //sets prep time
     setPrepTime = (e) => {
         this.setState({
             prepTime: e.currentTarget.value
         })
     }
 
+    //sets cook time
     setCookTime = (e) => {
         this.setState({
             cookTime: e.currentTarget.value
         })
     }
 
+    //sets serving size
     setServingSize = (e) => {
         this.setState({
             servingSize: e.currentTarget.value
         })
     }
 
+    //sets the ingredient list into an array of
+    //strings, splitting on each return
     handleIngredients = (e) => {
         this.setState({
             ingredients: e.currentTarget.value.split(/\r?\n/)
         })
     }
 
+    //sets directions list into an array of
+    //strings, splitting on each return
     handleDirections = (event) => {
         this.setState({
             directions: event.currentTarget.value.split(/\r?\n/)
         })
     }
 
+    //disables the submit button
     handleClick = () => {
         this.setState({
             disabled: true
         })
     }
 
+    //will send a post request to API
+    //returns new recipe with ID
+    //TODO: add new recipe to recipeData array
     handleSubmit = () => {
         alert('Submitted your recipe!')
     }
@@ -65,7 +76,7 @@ class AddRecipe extends Component {
                     <h1>New Recipe</h1>
                     <form>
                         {this.createIngredientForm}
-                        
+
                         <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
 
                         <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" />

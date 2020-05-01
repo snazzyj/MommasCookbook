@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import CbCkContext from '../ckbkcontext';
+import CkBkContext from '../ckbkcontext';
 
 class Nav extends Component {
 
-    static contextType = CbCkContext;
+    static contextType = CkBkContext;
 
     handleLogout = (e) => {
         e.preventDefault();

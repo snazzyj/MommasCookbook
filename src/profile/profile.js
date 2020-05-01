@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import CbCkContext from '../ckbkcontext';
+import CkBkContext from '../ckbkcontext';
 
 class Profile extends Component {
 
-    static contextType = CbCkContext;
+    static contextType = CkBkContext;
 
     render() {
         const {recipeData} = this.context.user;
