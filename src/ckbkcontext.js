@@ -2,7 +2,8 @@ import React from 'react';
 
 const CkBkContext = React.createContext({
     user: {},
-    setUserLogout: () => {}
+    setUserLogout: () => {},
+    setUserLogin: () => {}
 })
 
 export default CkBkContext;

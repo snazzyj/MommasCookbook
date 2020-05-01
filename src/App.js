@@ -44,13 +44,30 @@ class App extends Component {
     this.state = {
       user : {
         id: 0,
-        firstName: 'Alex',
-        isLoggedIn: true,
+        firstName: '',
+        isLoggedIn: false,
         recipeData: recipes
       }
     }
   }
 
+  //sets initial login state
+  //stores the user data into local storage
+  setUserLogin = (user) => {
+    this.setState({
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        isLoggedIn: true,
+        recipeData: user.recipeData
+      }
+    })
+
+    localStorage.setItem('user', JSON.stringify(this.state.user))
+  }
+
+  //resets state
+  //removes users obj from local storage
   setUserLogout = () => {
     this.setState({
       user: {
@@ -60,12 +77,15 @@ class App extends Component {
         recipeData: []
       }
     })
+
+    localStorage.removeItem('user')
   }
 
   render() {
     const contextValue = {
       user: this.state.user,
-      setUserLogout: this.setUserLogout
+      setUserLogout: this.setUserLogout,
+      setUserLogin: this.setUserLogin
     }
     return (
       <div className="App">
