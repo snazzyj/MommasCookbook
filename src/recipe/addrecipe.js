@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component, Fragment } from 'react';
+import Nav from '../nav/nav';
 import RecipeService from './recipeservice';
 
 class AddRecipe extends Component {
@@ -43,7 +44,7 @@ class AddRecipe extends Component {
     handleDirections = (event) => {
         this.setState({
             directions: event.currentTarget.value.split(/\r?\n/)
-        })    
+        })
     }
 
     handleClick = () => {
@@ -57,25 +58,25 @@ class AddRecipe extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
-            <section>
-                <h1>New Recipe</h1>
-                <form>
-                    {this.createIngredientForm
-                    }
+            <Fragment>
+                <Nav />
+                <section>
+                    <h1>New Recipe</h1>
+                    <form>
+                        {this.createIngredientForm}
+                        
+                        <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
 
-                    
-                    <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize}/>
+                        <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" />
+                        <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" />
 
-                    <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" />
-                    <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line"/>
-
-                    <button type="submit" onClick={(e) => {this.handleClick(); this.handleSubmit(e)}}>
-                        {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
-                    </button>
-                </form>
-            </section>
+                        <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
+                            {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
+                        </button>
+                    </form>
+                </section>
+            </Fragment>
         )
     }
 }
