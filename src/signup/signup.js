@@ -59,38 +59,39 @@ class SignUp extends Component {
 
     }
 
-    handleSubmit = (e) => {
+    handleSignup = (e) => {
         e.preventDefault();
 
-        const { name, email, password } = e.target
-        alert('All signed up!')
+        const { firstName, lastName, email, password } = e.target
 
-        // if(password.value.length >= 6) {
-        //     this.setState({
-        //         error: null
-        //     });
+        if(password.value.length >= 6) {
+            this.setState({
+                error: null
+            });
     
-        //     AuthApiService.postUser({
-        //         name: name.value,
-        //         email: email.value,
-        //         password: password.value
-        //     })
-        //         .then(user => {
-        //             name.value = ''
-        //             email.value = ''
-        //             password.val = ''
-        //             this.props.history.push('/login')
-        //         })
-        //         .catch(res => {
-        //             this.setState({
-        //                 error: res.error
-        //             });
-        //         });
-        // } else {
-        //     this.setState({
-        //       error: 'Invalid Password'  
-        //     })
-        // }
+            AuthApiService.postUser({
+                firstName: firstName.value,
+                lastName: lastName.value,
+                email: email.value,
+                password: password.value
+            })
+                .then(user => {
+                    console.log(user)
+                    // name.value = ''
+                    // email.value = ''
+                    // password.val = ''
+                    // this.props.history.push('/login')
+                })
+                .catch(res => {
+                    this.setState({
+                        error: res.error
+                    });
+                });
+        } else {
+            this.setState({
+              error: 'Invalid Password'  
+            })
+        }
 
 
     }

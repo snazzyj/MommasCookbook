@@ -30,11 +30,13 @@ const AuthApiService = {
         body: JSON.stringify(user)
       })
       .then(res => {
-        (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-      });
-      
+        if(res.ok) {
+          return res.json();
+        }
+        // (!res.ok)
+        // ? res.json().then(e => Promise.reject(e))
+        // : res.json()
+      })      
     }
   }
   

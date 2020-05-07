@@ -12,7 +12,7 @@ class Login extends Component {
     }
     static contextType = CkBkContext;
 
-    handleSubmit = (e) => {
+    handleLogin = (e) => {
         e.preventDefault();
 
         const { email, password } = e.target;
