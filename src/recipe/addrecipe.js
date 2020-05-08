@@ -1,21 +1,46 @@
 import React, { Component, Fragment } from 'react';
 import Nav from '../nav/nav';
 import RecipeService from './recipeservice';
+import CbCkContext from '../ckbkcontext';
+import config from '../config';
 
 class AddRecipe extends Component {
+
+    static contextType = CbCkContext;
 
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
+            recipeName: "",
             ingredients: [],
             directions: [],
             prepTime: "",
             cookTime: "",
             servingSize: "",
             tags: "",
-            disabled: false
+            disabled: false,
+            error: ''
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            recipeName: "",
+            ingredients: [],
+            directions: [],
+            prepTime: "",
+            cookTime: "",
+            servingSize: "",
+            tags: "",
+            disabled: false,
+            error: ''
+        })
+    }
+
+    setRecipeName = (e) => {
+        this.setState({
+            recipeName: e.currentTarget.value
+        })
     }
 
     //sets prep time
@@ -73,8 +98,43 @@ class AddRecipe extends Component {
     //will send a post request to API
     //returns new recipe with ID
     //TODO: add new recipe to recipeData array
-    handleSubmit = () => {
-        alert('Submitted your recipe!')
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        let {id} = this.context.user
+        let url = config.API_ENDPOINT + '/recipes'
+        let {recipeName, ingredients, directions, prepTime, cookTime, servingSize, tags } = this.state
+        let recipe = {
+            recipeName,
+            ingredients,
+            directions,
+            prepTime,
+            cookTime,
+            servingSize,
+            recipe_tags: tags,
+            creator_id: id
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(recipe)
+        })
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                this.setState({
+                    error: 'Something went wrong'
+                })
+            }
+        })
+        .then(data => {
+            this.context.addNewRecipe(data)
+            this.props.history.push('/')
+        })
     }
 
     render() {
@@ -84,7 +144,9 @@ class AddRecipe extends Component {
                 <section>
                     <h1>New Recipe</h1>
                     <form>
-                        {this.createIngredientForm}
+                        <label>
+                            <input onChange={this.setRecipeName} required placeholder="Recipe Name" />
+                        </label>
 
                         <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
 

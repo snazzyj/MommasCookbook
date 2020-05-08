@@ -23,6 +23,22 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      this.setState({
+        user
+      })
+    };
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.user !== prevState.user) {
+      localStorage.setItem('user', JSON.stringify(this.state.user))
+    };
+  }
+
+
   //sets initial login state
   //stores the user data into local storage
   setUserLogin = (user) => {
@@ -53,8 +69,16 @@ class App extends Component {
     localStorage.removeItem('user')
   }
 
+  addNewRecipe = (recipe) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        recipeData: [...this.state.user.recipeData, recipe]
+      }
+    })
+  }
+
   fillRecipeList = (recipeList) => {
-    console.log(recipeList)
     this.setState({
       recipeSearchResults: recipeList
     })
@@ -66,7 +90,8 @@ class App extends Component {
       recipeListData: this.state.recipeSearchResults,
       setUserLogout: this.setUserLogout,
       setUserLogin: this.setUserLogin,
-      fillRecipeList: this.fillRecipeList
+      fillRecipeList: this.fillRecipeList,
+      addNewRecipe: this.addNewRecipe
     }
     return (
       <div className="App">

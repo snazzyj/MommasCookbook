@@ -5,7 +5,8 @@ const CkBkContext = React.createContext({
     recipeList: {},
     setUserLogout: () => {},
     setUserLogin: () => {},
-    fillRecipeList: () => {}
+    fillRecipeList: () => {},
+    addNewRecipe: () => {}
 })
 
 export default CkBkContext;
