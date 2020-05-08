@@ -7,12 +7,13 @@ class AddRecipe extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            name: "",
             ingredients: [],
             directions: [],
             prepTime: "",
             cookTime: "",
             servingSize: "",
+            tags: "",
             disabled: false
         }
     }
@@ -54,6 +55,14 @@ class AddRecipe extends Component {
         })
     }
 
+    //sets state recipe tags by string value
+    //seperated by a comma
+    handleTags = (event) => {
+        this.setState({
+            tags: event.currentTarget.value
+        })
+    }
+ 
     //disables the submit button
     handleClick = () => {
         this.setState({
@@ -79,8 +88,9 @@ class AddRecipe extends Component {
 
                         <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
 
-                        <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" />
-                        <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" />
+                        <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
+                        <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
+                        <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
 
                         <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
                             {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}

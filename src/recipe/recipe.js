@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import {Link} from 'react-router-dom';
 import Nav from '../nav/nav';
 import CbCkContext from '../ckbkcontext';
 
+//renders each ingredient into its own li element
 const renderIngredientList = (ingredients) => {
     if (ingredients !== undefined) {
         return ingredients.map((el, i) =>
@@ -12,6 +14,7 @@ const renderIngredientList = (ingredients) => {
     }
 }
 
+//renders each direction into its own p tag
 const renderDirections = (directions) => {
     if (directions !== undefined) {
         return directions.map((el, i) =>
@@ -29,39 +32,64 @@ class Recipe extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: []
+            recipe: [],
+            error: ''
         }
     }
-    componentDidMount() {
-        const { recipeData } = this.context.user
-        const { id } = this.props.match.params;
 
-        this.setState({
-            recipe: recipeData.find((el) => {
-                return el.id === parseInt(id);
+    //On mount, perform a fetch request based on the ID param
+    //if the res is ok, set state of the zeroth index
+    //else display an error
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        const searchUrl = 'http://localhost:8000/api/recipes/' + id
+        fetch(searchUrl, {
+            method: 'GET'
+        })
+        .then(res => {
+            if(res.ok){
+                return res.json()
+            } else {
+                this.setState({
+                    error: 'Oops! Something went wrong fetching that recipe!'
+                })
+            }
+        })
+        .then(data => {
+            this.setState({
+                recipe: data[0]
             })
         })
     }
     render() {
         const { recipe } = this.state
-        console.log(recipe)
+        const {isLoggedIn} = this.context.user
         return (
             <Fragment>
-                <Nav />
+                {isLoggedIn 
+                ? <Nav />
+                : <Link to="/"> Home </Link>
+                }
                 <section>
-                    <h1>{recipe.recipeName}</h1>
+                    <h1>{recipe.recipe_name}</h1>
 
-                    <p>Prep Time: <span>{recipe.prepTime}</span></p>
+                    <p>Prep Time: <span>{recipe.preptime}</span></p>
 
-                    <p>Cook Time: <span>{recipe.cookTime}</span></p>
+                    <p>Cook Time: <span>{recipe.cooktime}</span></p>
 
-                    <p>Serving Size: <span>{recipe.servingSize}</span></p>
+                    <p>Serving Size: <span>{recipe.servingsize}</span></p>
 
                     <h3>Ingredients</h3>
-                    {renderIngredientList(recipe.ingredients)}
+                    <ul>
+                        {renderIngredientList(recipe.ingredients)}
+                    </ul>
 
                     <h3>Directions</h3>
                     {renderDirections(recipe.directions)}
+                    
+                    <p>
+                        {this.state.error}
+                    </p>
                 </section>
 
             </Fragment>
