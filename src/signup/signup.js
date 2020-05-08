@@ -76,7 +76,6 @@ class SignUp extends Component {
                 password: password.value
             })
                 .then(user => {
-                    console.log(user)
                     // name.value = ''
                     // email.value = ''
                     // password.val = ''
