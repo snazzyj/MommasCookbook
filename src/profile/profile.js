@@ -16,9 +16,9 @@ class Profile extends Component {
                 </Link>
 
                 {recipeData.map((recipe) => {
-                    let url = `/recipe/${recipe.id}`
-                    return <li key={recipe.id}>
-                                <Link to={url}>{recipe.recipeName}</Link>
+                    let url = `/recipe/${recipe.recipe_id}`
+                    return <li key={recipe.recipe_id}>
+                                <Link to={url}>{recipe.recipe_name}</Link>
                            </li>
                 })}
             </Fragment>
