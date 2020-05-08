@@ -4,38 +4,9 @@ import Homepage from './homepage/homepage';
 import Profile from './profile/profile';
 import Recipe from './recipe/recipe';
 import AddRecipe from './recipe/addrecipe';
+import RecipeListMain from './recipelistmain/recipelistmain';
 import CbBkContext from './ckbkcontext';
 import './App.css';
-
-const recipes = [
-  {
-    id: 1,
-    recipeName: 'Stuffed Red Pepper Vegan Style',
-    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
-    directions: ["Preheat oven to 350 degrees", "Add onions and green peppers into red pepper", "Put red peppers into oven for 30 minutes"],
-    prepTime: '15 Minutes',
-    cookTime: '30 Minutes',
-    servingSize: '1-2'
-  },
-  {
-    id: 2,
-    recipeName: 'Leynas special',
-    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
-    directions: ["Preheat oven to 350 degrees", "Place chicken in a pan with the onions and peppers", "Wait 5 minutes before serving"],
-    prepTime: '10 minutes',
-    cookTime: '20 minutes',
-    servingSize: '3-4'
-  },
-  {
-    id: 3,
-    recipeName: 'Double Whoops',
-    ingredients : ["2 Chicken breasts diced", "1 onion, diced", "1/4 cup of salt and pepper", "1 green pepper"],
-    directions: ["Put olive into pan with the stove on high", "Mix your chicken in with the salt and pepper", "Put the onions and green peppers into the pan", "place chicken into pan with the veggies"],
-    prepTime: '10 minutes',
-    cookTime: '15 minutes',
-    servingSize: '1-2'
-  }
-]
 
 class App extends Component {
 
@@ -46,8 +17,9 @@ class App extends Component {
         id: 0,
         firstName: '',
         isLoggedIn: false,
-        recipeData: recipes
-      }
+        recipeData: []
+      },
+      recipeSearchResults: []
     }
   }
 
@@ -81,11 +53,20 @@ class App extends Component {
     localStorage.removeItem('user')
   }
 
+  fillRecipeList = (recipeList) => {
+    console.log(recipeList)
+    this.setState({
+      recipeSearchResults: recipeList
+    })
+  }
+
   render() {
     const contextValue = {
       user: this.state.user,
+      recipeListData: this.state.recipeSearchResults,
       setUserLogout: this.setUserLogout,
-      setUserLogin: this.setUserLogin
+      setUserLogin: this.setUserLogin,
+      fillRecipeList: this.fillRecipeList
     }
     return (
       <div className="App">
@@ -97,6 +78,7 @@ class App extends Component {
               <Route exact path="/" component={Homepage} />
               <Route path="/profile/:id" component={Profile} />
               <Route path="/recipe/:id" component={Recipe} />
+              <Route path="/searchresults" component={RecipeListMain} />
               <Route path="/addrecipe" component={AddRecipe} /> 
             </Switch>
           </main>
