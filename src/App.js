@@ -84,6 +84,16 @@ class App extends Component {
     })
   }
 
+  updateRecipeData = (updatedRecipe) => {
+    this.setState({
+      user: {...this.state.user,
+        recipeData: this.state.user.recipeData.map(recipe =>
+            (recipe.recipe_id !== updatedRecipe.recipe_id) ? recipe : updatedRecipe
+          )
+      }
+    })
+  }
+
   render() {
     const contextValue = {
       user: this.state.user,
@@ -91,8 +101,10 @@ class App extends Component {
       setUserLogout: this.setUserLogout,
       setUserLogin: this.setUserLogin,
       fillRecipeList: this.fillRecipeList,
-      addNewRecipe: this.addNewRecipe
+      addNewRecipe: this.addNewRecipe,
+      updateRecipeData: this.updateRecipeData
     }
+    console.log(this.state.user.recipeData)
     return (
       <div className="App">
         <BrowserRouter>
@@ -104,7 +116,7 @@ class App extends Component {
               <Route path="/profile/:id" component={Profile} />
               <Route path="/recipe/:id" component={Recipe} />
               <Route path="/searchresults" component={RecipeListMain} />
-              <Route path="/addrecipe" component={AddRecipe} /> 
+              <Route path="/addrecipe" component={AddRecipe} />
             </Switch>
           </main>
 
