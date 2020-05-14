@@ -17,6 +17,24 @@ const RecipeService = {
                 </label>
             </Fragment>
         )
+    },
+
+    RecipeDetailsOnEdit(props) {
+        return (
+            <Fragment>
+                <label>
+                    <input type="text" onChange={props.updatePrep} defaultValue={props.prep}/>
+                </label>
+    
+                <label>
+                    <input type="text" onChange={props.updateCook} defaultValue={props.cook}/>
+                </label>
+    
+                <label>
+                    <input type="text" onChange={props.updateServing} defaultValue={props.serving}/>
+                </label>
+            </Fragment>
+        ) 
     }
 }
 export default RecipeService

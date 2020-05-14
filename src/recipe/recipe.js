@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Nav from '../nav/nav';
+import RecipeService from './recipeservice';
 import CbCkContext from '../ckbkcontext';
+import config from '../config';
 
 //renders each ingredient into its own li element
 const renderIngredientList = (ingredients) => {
@@ -33,6 +35,7 @@ class Recipe extends Component {
         super(props);
         this.state = {
             recipe: [],
+            editing: false,
             error: ''
         }
     }
@@ -46,47 +49,172 @@ class Recipe extends Component {
         fetch(searchUrl, {
             method: 'GET'
         })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    this.setState({
+                        error: 'Oops! Something went wrong fetching that recipe!'
+                    })
+                }
+            })
+            .then(data => {
+                this.setState({
+                    recipe: data[0]
+                })
+            })
+    }
+
+    toggleEditOn = () => {
+        this.setState({
+            editing: true
+        })
+    }
+
+    toggleEditOff = () => {
+        const {id} = this.props.match.params;
+        const {creator_id, recipe_id, recipe_name, recipe_tags,
+               ingredients, directions, preptime, cooktime, servingsize} = this.state.recipe
+        const updatedRecipe = {creator_id, recipe_id, recipe_name, recipe_tags,
+            ingredients, directions, preptime, cooktime, servingsize}
+        const url = config.API_ENDPOINT + '/recipes/' + id;
+
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe)
+        })
         .then(res => {
-            if(res.ok){
-                return res.json()
+            if(res.ok) {
+                return res.json();
             } else {
                 this.setState({
-                    error: 'Oops! Something went wrong fetching that recipe!'
+                    error: 'Something went wrong'
                 })
             }
         })
-        .then(data => {
+        .then(updatedRecipe => {
             this.setState({
-                recipe: data[0]
+                editing: false
             })
+            this.context.updateRecipeData(updatedRecipe[0])
         })
     }
+
+    updateRecipeName = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                    recipe_name: e.currentTarget.value
+            }
+        })
+    }
+
+    updateDirections = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                directions: e.currentTarget.value.split(/[,\r?\n]/)
+            }
+        })
+    }
+
+    updateIngredients = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                ingredients: e.currentTarget.value.split(/[,\r?\n]/)
+            }
+        })
+    }
+
+    updateTags = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                    recipe_tags: e.currentTarget.value
+            }
+        })
+    }
+
+    updatePrepTime = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                    preptime: e.currentTarget.value
+            }
+        })
+    }
+
+    updateCookTime = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                    cooktime: e.currentTarget.value
+            }
+        })
+    }
+
+    updateServingSize = (e) => {
+        this.setState({
+            recipe: {...this.state.recipe,
+                    servingsize: e.currentTarget.value
+            }
+        })
+    }
+
     render() {
-        const { recipe } = this.state
-        const {isLoggedIn} = this.context.user
+        const { recipe, editing } = this.state
+        const { isLoggedIn } = this.context.user
         return (
             <Fragment>
-                {isLoggedIn 
-                ? <Nav />
-                : <Link to="/"> Home </Link>
+                {isLoggedIn
+                    ? <Nav />
+                    : <Link to="/"> Home </Link>
                 }
                 <section>
-                    <h1>{recipe.recipe_name}</h1>
+                    {!editing ?
+                        <button onClick={this.toggleEditOn}>Edit</button>
+                        : <button onClick={this.toggleEditOff}>Save</button>
+                    }
 
-                    <p>Prep Time: <span>{recipe.preptime}</span></p>
+                    {!editing ?
+                        <Fragment>
 
-                    <p>Cook Time: <span>{recipe.cooktime}</span></p>
+                            <h1>{recipe.recipe_name}</h1>
 
-                    <p>Serving Size: <span>{recipe.servingsize}</span></p>
+                            <p>Prep Time: <span>{recipe.preptime}</span></p>
 
-                    <h3>Ingredients</h3>
-                    <ul>
-                        {renderIngredientList(recipe.ingredients)}
-                    </ul>
+                            <p>Cook Time: <span>{recipe.cooktime}</span></p>
 
-                    <h3>Directions</h3>
-                    {renderDirections(recipe.directions)}
-                    
+                            <p>Serving Size: <span>{recipe.servingsize}</span></p>
+
+                            <h3>Ingredients</h3>
+                            <ul>
+                                {renderIngredientList(recipe.ingredients)}
+                            </ul>
+
+                            <h3>Directions</h3>
+                            {renderDirections(recipe.directions)}
+                        </Fragment>
+
+                        : 
+                        <Fragment>
+                            <label>
+                                <input defaultValue={recipe.recipe_name} onChange={this.updateRecipeName} />
+                            </label>
+
+                            <RecipeService.RecipeDetailsOnEdit
+                                prep={recipe.preptime}
+                                cook={recipe.cooktime}
+                                serving={recipe.servingsize}
+                                updatePrep={this.updatePrepTime}
+                                updateCook={this.updateCookTime}
+                                updateServing={this.updateServingSize}
+                            />
+
+                            <textarea defaultValue={recipe.ingredients} onChange={this.updateIngredients} />
+                            <textarea defaultValue={recipe.directions} onChange={this.updateDirections}/>
+                            <textarea defaultValue={recipe.recipe_tags} onChange={this.updateTags} />
+                        </Fragment>
+                    }
+
                     <p>
                         {this.state.error}
                     </p>
