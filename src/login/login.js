@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AuthApiService from '../services/auth-api-service';
 import CkBkContext from '../ckbkcontext';
 
@@ -9,8 +9,17 @@ class Login extends Component {
         this.state = {
             error: ''
         };
+        this._isMounted = false;
     }
     static contextType = CkBkContext;
+
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
     handleLogin = (e) => {
         e.preventDefault();
@@ -25,14 +34,19 @@ class Login extends Component {
                 const { user } = res;
                 this.context.setUserLogin(user)
                 this.props.history.push('/')
+                this._isMounted = false
             })
             .catch(error => {
-                this.setState({
-                    error
-                })
+                if (this._isMounted) {
+                    this.setState({
+                        error
+                    })
+                }
+
             });
 
     }
+
     render() {
         return (
             <section>
@@ -40,7 +54,7 @@ class Login extends Component {
 
                 <form onSubmit={this.handleLogin}>
                     <label htmlFor="email">Email
-                        <input name="email" type="email" required/>
+                        <input name="email" type="email" required />
                     </label>
                     <label htmlFor="password">Password
                         <input name="password" type="text" required />
