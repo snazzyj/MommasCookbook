@@ -104,7 +104,6 @@ class App extends Component {
       addNewRecipe: this.addNewRecipe,
       updateRecipeData: this.updateRecipeData
     }
-    console.log(this.state.user.recipeData)
     return (
       <div className="App">
         <BrowserRouter>
