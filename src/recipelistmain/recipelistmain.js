@@ -11,7 +11,7 @@ class RecipeListMain extends Component {
         return (
             <Fragment>
                 <ul>
-                {recipeListData.map((item) => {
+                {recipeListData && recipeListData.map((item) => {
                     let url = '/recipe/' + item.recipe_id
                     return <li key={item.recipe_id}>
                         <Link to={url}>
