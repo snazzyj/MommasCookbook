@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import AuthApiService from '../services/auth-api-service';
+import CkBkContext from '../ckbkcontext';
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i); // eslint-disable-line
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
 class SignUp extends Component {
+
+    static contextType = CkBkContext
 
     constructor(props) {
         super(props);
@@ -75,11 +78,9 @@ class SignUp extends Component {
                 email: email.value,
                 password: password.value
             })
-                .then(user => {
-                    // name.value = ''
-                    // email.value = ''
-                    // password.val = ''
-                    // this.props.history.push('/login')
+                .then(res => {
+                    const {newUserInfo} = res;
+                    this.context.setUserLogin(newUserInfo);
                 })
                 .catch(res => {
                     this.setState({
