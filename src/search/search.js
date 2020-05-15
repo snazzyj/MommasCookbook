@@ -43,12 +43,14 @@ class SearchBox extends Component {
     }
 
     render() {
+        const {error} = this.state;
         return (
             <Fragment>
                 <label>
                     <input onChange={this.handleSearchInput} />
                 </label>
                 <button onClick={this.handleSearch}>Search</button>
+                <p>{error}</p>
             </Fragment>
         )
     }
