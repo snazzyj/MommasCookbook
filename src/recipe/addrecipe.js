@@ -3,6 +3,7 @@ import Nav from '../nav/nav';
 import RecipeService from './recipeservice';
 import CbCkContext from '../ckbkcontext';
 import config from '../config';
+import './recipe.css'
 
 class AddRecipe extends Component {
 
@@ -87,7 +88,7 @@ class AddRecipe extends Component {
             tags: event.currentTarget.value
         })
     }
- 
+
     //disables the submit button
     handleClick = () => {
         this.setState({
@@ -101,9 +102,9 @@ class AddRecipe extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        let {id} = this.context.user
+        let { id } = this.context.user
         let url = config.API_ENDPOINT + '/recipes'
-        let {recipeName, ingredients, directions, prepTime, cookTime, servingSize, tags } = this.state
+        let { recipeName, ingredients, directions, prepTime, cookTime, servingSize, tags } = this.state
         let recipe = {
             recipeName,
             ingredients,
@@ -122,19 +123,19 @@ class AddRecipe extends Component {
             },
             body: JSON.stringify(recipe)
         })
-        .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                this.setState({
-                    error: 'Something went wrong'
-                })
-            }
-        })
-        .then(data => {
-            this.context.addNewRecipe(data)
-            this.props.history.push('/')
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    this.setState({
+                        error: 'Something went wrong'
+                    })
+                }
+            })
+            .then(data => {
+                this.context.addNewRecipe(data)
+                this.props.history.push('/')
+            })
     }
 
     render() {
@@ -143,16 +144,28 @@ class AddRecipe extends Component {
                 <Nav />
                 <section>
                     <h1>New Recipe</h1>
-                    <form>
-                        <label>
-                            <input onChange={this.setRecipeName} required placeholder="Recipe Name" />
-                        </label>
+                    <form className="addRecipeForm">
 
-                        <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
+                        <div className="top">
+                            <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
+                        </div>
 
-                        <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
-                        <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
-                        <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
+                        <ul className="bottom">
+                            <li>
+                                <label> Recipe Title
+                                </label>
+                                <input className="recipeNameInput" onChange={this.setRecipeName} required placeholder="" />
+                            </li>
+                            <li>
+                                <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
+                            </li>
+                            <li>
+                                <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
+                            </li>
+                            <li>
+                                <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
+                            </li>
+                        </ul>
 
                         <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
                             {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}

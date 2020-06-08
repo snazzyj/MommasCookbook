@@ -23,10 +23,10 @@ class Homepage extends Component {
                       </Fragment>
                     : <Fragment>
                         <h1>Momma's Hidden Cookbook</h1>  
-                        <nav>
+                        <div>
                             <Login />
                             <SignUp />
-                        </nav>
+                        </div>
                         <SearchBox history={this.props.history} />
                       </Fragment>
                 }

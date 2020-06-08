@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBox from '../search/search';
 import CkBkContext from '../ckbkcontext';
+import './nav.css'
 
 class Nav extends Component {
 
@@ -13,15 +14,22 @@ class Nav extends Component {
     }
 
     render() {
-        const {isLoggedIn} = this.context.user;
+        const { isLoggedIn } = this.context.user;
         return (
-            <Fragment>
-            <Link to="/">My Dashboard</Link>
-            {isLoggedIn && (
-                <Link to="/" onClick={this.handleLogout}>Logout</Link>
-            )}
-            <SearchBox history={this.props.history} />
-            </Fragment>
+            <nav>
+                <h1>Momma's Hidden Cookbook</h1>  
+                <SearchBox history={this.props.history} />
+                <div className="mainLinks">
+
+                <Link to="/">My Dashboard</Link>
+                <Link to="/addrecipe">
+                    Add Recipe
+                </Link>
+                {isLoggedIn && (
+                    <Link to="/" onClick={this.handleLogout}>Logout</Link>
+                    )}
+                </div>
+            </nav>
 
         )
     }

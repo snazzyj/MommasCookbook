@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import CkBkContext from '../ckbkcontext';
 
 class SearchBox extends Component {
@@ -45,13 +45,13 @@ class SearchBox extends Component {
     render() {
         const {error} = this.state;
         return (
-            <Fragment>
+            <div className="search">
                 <label>
                     <input onChange={this.handleSearchInput} />
                 </label>
                 <button onClick={this.handleSearch}>Search</button>
                 <p>{error}</p>
-            </Fragment>
+            </div>
         )
     }
 

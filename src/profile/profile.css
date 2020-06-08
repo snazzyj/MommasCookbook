@@ -1,0 +1,39 @@
+.title {
+    margin-top: 100px;
+}
+
+.recipeList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    height: 100%;
+}
+
+.recipeList > li {
+    list-style-type: none;
+    min-height: 225px;
+    width: 175px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    font-size: 24px;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.recipeList > li > a:link, .recipeList > li > a:visited {
+    color: black;
+}
+
+.recipeList > li > a:hover {
+    background-color: white;
+    /* color: black; */
+    transition: background-color 0.5s ease-in-out;
+}
+
+.recipeList > li > a {
+    display: block;
+    height: 225px;
+    width: 175px;
+    text-decoration: none;
+}

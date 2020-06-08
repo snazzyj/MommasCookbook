@@ -1,0 +1,60 @@
+.addRecipeForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipeNameInput {
+    padding: 10px 15px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.top, .bottom {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.top {
+    width: 33%;
+}
+
+.top > label {
+    padding: 10px;
+}
+
+.top > label > input {
+    padding: 10px;
+}
+
+.bottom > li > textarea {
+    margin-bottom: 15px;
+    height: 150px;
+    width: 100%;
+}
+
+.bottom > li {
+    width: 100%;
+    list-style-type: none;
+}
+
+.bottom > li > label {
+    float: left
+}
+
+.bottom {
+    margin-bottom: 50px;
+    width: 50%
+}
+
+.addRecipeForm > button {
+    width: 100px;
+    height: 50px;
+    /* position: absolute;
+    bottom: 0; */
+    cursor: pointer;
+}
