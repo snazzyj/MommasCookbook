@@ -144,32 +144,25 @@ class AddRecipe extends Component {
                 <Nav />
                 <section>
                     <h1>New Recipe</h1>
-                    <form className="addRecipeForm">
+                    <form className="addRecipe">
 
-                        <div className="top">
+                        <div className="mainContainer">
+                            <label className="recipeName">
+                                <input className="recipeNameInput" onChange={this.setRecipeName} required placeholder="Recipe Title" />
+                            </label>
                             <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
+
+                            <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
+
+                            <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
+
+                            <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
+
+                            <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
+                                {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
+                            </button>
+
                         </div>
-
-                        <ul className="bottom">
-                            <li>
-                                <label> Recipe Title
-                                </label>
-                                <input className="recipeNameInput" onChange={this.setRecipeName} required placeholder="" />
-                            </li>
-                            <li>
-                                <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
-                            </li>
-                            <li>
-                                <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
-                            </li>
-                            <li>
-                                <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
-                            </li>
-                        </ul>
-
-                        <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
-                            {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
-                        </button>
                     </form>
                 </section>
             </Fragment>

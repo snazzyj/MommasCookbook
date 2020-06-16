@@ -18,9 +18,10 @@ const renderIngredientList = (ingredients) => {
 
 //renders each direction into its own p tag
 const renderDirections = (directions) => {
+    let x = 0;
     if (directions !== undefined) {
         return directions.map((el, i) =>
-            <p key={i}>{el}</p>
+            <p key={i}><span>{x = x + 1} </span>{el}</p>
         )
     } else {
         return ''
@@ -170,34 +171,36 @@ class Recipe extends Component {
                 }
                 <section>
                     {!editing ?
-                        <button onClick={this.toggleEditOn}>Edit</button>
-                        : <button onClick={this.toggleEditOff}>Save</button>
-                    }
-
-                    {!editing ?
-                        <Fragment>
+                        <section className="recipe">
 
                             <h1>{recipe.recipe_name}</h1>
 
-                            <p>Prep Time: <span>{recipe.preptime}</span></p>
+                            <div className="recipeInfo">
+                                <p>Prep Time: <span>{recipe.preptime}</span></p>
 
-                            <p>Cook Time: <span>{recipe.cooktime}</span></p>
+                                <p>Cook Time: <span>{recipe.cooktime}</span></p>
 
-                            <p>Serving Size: <span>{recipe.servingsize}</span></p>
+                                <p>Serving Size: <span>{recipe.servingsize}</span></p>
+                            </div>
 
-                            <h3>Ingredients</h3>
-                            <ul>
+                            <div className="ingredients">
+                                <h3>Ingredients</h3>
+                                <ul>
                                 {renderIngredientList(recipe.ingredients)}
-                            </ul>
+                                </ul>
+                            </div>
 
-                            <h3>Directions</h3>
-                            {renderDirections(recipe.directions)}
-                        </Fragment>
+                            <div className="directions">
+                                <h3>Directions</h3>
+                                {renderDirections(recipe.directions)}
+                            </div>
+
+                        </section>
 
                         : 
-                        <Fragment>
-                            <label>
-                                <input defaultValue={recipe.recipe_name} onChange={this.updateRecipeName} />
+                        <section className="editRecipe">
+                            <label className="recipeName">Recipe Name
+                                <input className="recipeNameInput" defaultValue={recipe.recipe_name} onChange={this.updateRecipeName} />
                             </label>
 
                             <RecipeService.RecipeDetailsOnEdit
@@ -208,11 +211,23 @@ class Recipe extends Component {
                                 updateCook={this.updateCookTime}
                                 updateServing={this.updateServingSize}
                             />
+                            <label className="ingredientsLabel">Ingredients
+                                <textarea defaultValue={recipe.ingredients} onChange={this.updateIngredients} />
+                            </label>
 
-                            <textarea defaultValue={recipe.ingredients} onChange={this.updateIngredients} />
-                            <textarea defaultValue={recipe.directions} onChange={this.updateDirections}/>
-                            <textarea defaultValue={recipe.recipe_tags} onChange={this.updateTags} />
-                        </Fragment>
+                            <label className="directionsLabel">Directions
+                                <textarea defaultValue={recipe.directions} onChange={this.updateDirections}/>
+                            </label>
+
+                            <label className="recipeTagsLabel">Recipe Tags
+                                <textarea defaultValue={recipe.recipe_tags} onChange={this.updateTags} />
+                            </label>
+                        </section>
+                    }
+
+                    {!editing ?
+                        <button className="editBtn" onClick={this.toggleEditOn}>Edit</button>
+                        : <button className="saveBtn" onClick={this.toggleEditOff}>Save</button>
                     }
 
                     <p>

@@ -1,60 +1,98 @@
-.addRecipeForm {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 90%;
+/* Display Recipe Screen */
+.recipe {
+    width: 66%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.recipeNameInput {
-    padding: 10px 15px;
-    width: 100%;
-    margin-bottom: 15px;
+.recipe > h1 {
+    font-size: 28px;
 }
 
-.top, .bottom {
+.recipeInfo, .ingredients, .directions {
     display: flex;
-    flex-direction: column;
-    margin-right: 50px;
+    flex-direction: row;
+    width: 66%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+.recipeInfo > p {
+    border: black 1px solid;
+    padding: 20px;
 }
 
-.top {
+.recipe > h1{
+    text-decoration: underline;
+}
+
+.ingredients > ul {
+    list-style-type: square;
+    margin-left: auto;
+    margin-right: auto;
     width: 33%;
 }
 
-.top > label {
-    padding: 10px;
+.ingredients, .directions {
+    border: black 1px solid;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-.top > label > input {
-    padding: 10px;
+.ingredients > h3, .directions > h3 {
+    text-decoration: underline;
+    font-size: 24px;
+    width: 100%;
 }
 
-.bottom > li > textarea {
+/* Edit Recipe Screen */
+
+.editRecipe {
+    margin-top: 25px;
+}
+
+/* Add Recipe Screen */
+
+.recipeName {
+    width: 50%;
+}
+
+.recipeNameInput, .recipePrep, .recipeCook, .recipeServing {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.mainContainer, .editRecipe {
+    width: 50%;;
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.mainContainer > textarea, .editRecipe > textarea, .editRecipe > label > textarea {
     margin-bottom: 15px;
     height: 150px;
     width: 100%;
 }
 
-.bottom > li {
+.editRecipe > label {
+    font-size: 18px;
+}
+
+.mainContainer > label, .ingredientsLabel, .directionsLabel, .recipeTagsLabel {
     width: 100%;
-    list-style-type: none;
+    font-size: 18px;
+    text-align: left;
 }
 
-.bottom > li > label {
-    float: left
-}
-
-.bottom {
-    margin-bottom: 50px;
-    width: 50%
-}
-
-.addRecipeForm > button {
+.mainContainer > button, .editBtn, .saveBtn {
     width: 100px;
     height: 50px;
-    /* position: absolute;
-    bottom: 0; */
     cursor: pointer;
 }
