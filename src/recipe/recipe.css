@@ -26,11 +26,16 @@
     text-decoration: underline;
 }
 
-.ingredients > ul {
+.ingredients > ul, .directions > ul {
     list-style-type: square;
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 33%;
+    width: 50%;
+}
+
+.ingredients > ul > li, .directions > ul> li {
+    text-align: left;
 }
 
 .ingredients, .directions {
@@ -62,10 +67,12 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
+    text-align: center;
+    font-size: 18px;
 }
 
 .mainContainer, .editRecipe {
-    width: 50%;;
+    width: 50%;
     display: flex;
     flex-direction: column;
     margin-right: auto;
@@ -75,7 +82,7 @@
     margin-bottom: 50px;
 }
 
-.mainContainer > textarea, .editRecipe > textarea, .editRecipe > label > textarea {
+.mainContainer > label > textarea, .editRecipe > textarea, .editRecipe > label > textarea {
     margin-bottom: 15px;
     height: 150px;
     width: 100%;
@@ -85,13 +92,14 @@
     font-size: 18px;
 }
 
-.mainContainer > label, .ingredientsLabel, .directionsLabel, .recipeTagsLabel {
+/* .mainContainer > label,  */
+ .ingredientsLabel, .directionsLabel, .recipeTagsLabel {
     width: 100%;
     font-size: 18px;
     text-align: left;
 }
 
-.mainContainer > button, .editBtn, .saveBtn {
+.mainContainer > button, .editBtn, .saveBtn, .deleteBtn {
     width: 100px;
     height: 50px;
     cursor: pointer;

@@ -152,11 +152,17 @@ class AddRecipe extends Component {
                             </label>
                             <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
 
-                            <textarea onChange={this.handleIngredients} placeholder="Ingredients go here...Put each ingredient on its own line" required />
+                            <label className="ingredientsLabel">Ingredients
+                                <textarea onChange={this.handleIngredients} placeholder="Put each ingredient on its own line" required />
+                            </label>
 
-                            <textarea onChange={this.handleDirections} placeholder="Directions go here...Put each step on its own line" required />
+                            <label className="directionsLabel">Directions
+                                <textarea onChange={this.handleDirections} placeholder="Put each step on its own line" required />
+                            </label>
 
-                            <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
+                            <label className="recipeTagsLabel">Recipe tags
+                                <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
+                            </label>
 
                             <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
                                 {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}

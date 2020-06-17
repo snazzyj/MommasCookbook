@@ -4,15 +4,15 @@ const RecipeService = {
     RecipeDetails(props) {
         return (
             <Fragment>
-                <label>
+                <label> Prep Time
                     <input className="recipePrep" type="text" onInput={props.setPrepTime} placeholder="Prep Time"/>
                 </label>
     
-                <label>
+                <label> Cook Time
                     <input className="recipeCook" type="text" onInput={props.setCookTime} placeholder="Cook Time"/>
                 </label>
     
-                <label>
+                <label> Serving Size
                     <input className="recipeServing" type="text" onInput={props.setServingSize} placeholder="Serving Size"/>
                 </label>
             </Fragment>
