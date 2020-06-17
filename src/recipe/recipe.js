@@ -21,7 +21,7 @@ const renderDirections = (directions) => {
     let x = 0;
     if (directions !== undefined) {
         return directions.map((el, i) =>
-            <p key={i}><span>{x = x + 1} </span>{el}</p>
+            <li key={i}><span>{x = x + 1} </span>{el}</li>
         )
     } else {
         return ''
@@ -104,6 +104,26 @@ class Recipe extends Component {
         })
     }
 
+    deleteRecipe = () => {
+        const {id} = this.props.match.params;
+        const url = config.API_ENDPOINT + '/recipes/' + id
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+        .then( () => {
+            this.context.deleteRecipe(id);
+            this.props.history.push('/')
+        })
+        .catch(error => {
+            this.setState({
+                error
+            })
+        })
+    }
+
     updateRecipeName = (e) => {
         this.setState({
             recipe: {...this.state.recipe,
@@ -170,7 +190,7 @@ class Recipe extends Component {
                     : <Link to="/"> Home </Link>
                 }
                 <section>
-                    {!editing ?
+                    {!editing && recipe ?
                         <section className="recipe">
 
                             <h1>{recipe.recipe_name}</h1>
@@ -186,13 +206,15 @@ class Recipe extends Component {
                             <div className="ingredients">
                                 <h3>Ingredients</h3>
                                 <ul>
-                                {renderIngredientList(recipe.ingredients)}
+                                    {renderIngredientList(recipe.ingredients)}
                                 </ul>
                             </div>
 
                             <div className="directions">
                                 <h3>Directions</h3>
-                                {renderDirections(recipe.directions)}
+                                <ul>
+                                    {renderDirections(recipe.directions)}
+                                </ul>
                             </div>
 
                         </section>
@@ -226,7 +248,10 @@ class Recipe extends Component {
                     }
 
                     {!editing ?
-                        <button className="editBtn" onClick={this.toggleEditOn}>Edit</button>
+                        <Fragment>
+                            <button className="editBtn" onClick={this.toggleEditOn}>Edit</button>
+                            <button className="deleteBtn" onClick={this.deleteRecipe}>Delete</button>
+                        </Fragment>
                         : <button className="saveBtn" onClick={this.toggleEditOff}>Save</button>
                     }
 

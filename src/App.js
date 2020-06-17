@@ -16,7 +16,7 @@ class App extends Component {
       user : {
         id: 0,
         firstName: '',
-        isLoggedIn: false,
+        isLoggedIn: true,
         recipeData: []
       },
       recipeSearchResults: []
@@ -94,6 +94,15 @@ class App extends Component {
     })
   }
 
+  deleteRecipe = (recipeId) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        recipeData: this.state.user.recipeData.filter(recipe => recipe.recipe_id !== parseInt(recipeId) )
+      }
+    })
+  }
+
   render() {
     const contextValue = {
       user: this.state.user,
@@ -102,7 +111,8 @@ class App extends Component {
       setUserLogin: this.setUserLogin,
       fillRecipeList: this.fillRecipeList,
       addNewRecipe: this.addNewRecipe,
-      updateRecipeData: this.updateRecipeData
+      updateRecipeData: this.updateRecipeData,
+      deleteRecipe: this.deleteRecipe
     }
     return (
       <div className="App">
