@@ -9,6 +9,8 @@
     flex-wrap: wrap;
     padding: 0;
     height: 100%;
+    width: 75%;
+    margin: auto auto;
 }
 
 .recipeList > li {

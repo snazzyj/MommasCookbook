@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react';
 import Profile from '../profile/profile';
 import Login from '../login/login';
 import SignUp from '../signup/signup';
-import Nav from '../nav/nav';
 import SearchBox from '../search/search';
 import CkBkContext from '../ckbkcontext';
 
@@ -18,7 +17,6 @@ class Homepage extends Component {
             <Fragment>
                 {isLoggedIn
                     ? <Fragment>
-                        <Nav />
                         <Profile />
                       </Fragment>
                     : <Fragment>

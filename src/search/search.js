@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import CkBkContext from '../ckbkcontext';
 
 class SearchBox extends Component {
@@ -57,4 +58,4 @@ class SearchBox extends Component {
 
 }
 
-export default SearchBox;
+export default withRouter(SearchBox);

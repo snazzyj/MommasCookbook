@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import CkBkContext from '../ckbkcontext';
+import '../profile/profile.css'
 
 class RecipeListMain extends Component {
 
@@ -10,12 +11,12 @@ class RecipeListMain extends Component {
         const {recipeListData} = this.context;
         return (
             <Fragment>
-                <ul>
+                <ul className="recipeList">
                 {recipeListData && recipeListData.map((item) => {
                     let url = '/recipe/' + item.recipe_id
                     return <li key={item.recipe_id}>
                         <Link to={url}>
-                            <h3>{item.recipe_name}</h3>
+                            {item.recipe_name}
                         </Link>
                     </li>
                 })}

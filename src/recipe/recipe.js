@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import Nav from '../nav/nav';
 import RecipeService from './recipeservice';
 import CbCkContext from '../ckbkcontext';
 import config from '../config';
@@ -184,11 +182,6 @@ class Recipe extends Component {
         const { recipe, editing } = this.state
         const { isLoggedIn } = this.context.user
         return (
-            <Fragment>
-                {isLoggedIn
-                    ? <Nav />
-                    : <Link to="/"> Home </Link>
-                }
                 <section>
                     {!editing && recipe ?
                         <section className="recipe">
@@ -259,8 +252,6 @@ class Recipe extends Component {
                         {this.state.error}
                     </p>
                 </section>
-
-            </Fragment>
         )
     }
 }

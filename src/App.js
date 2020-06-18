@@ -5,6 +5,7 @@ import Profile from './profile/profile';
 import Recipe from './recipe/recipe';
 import AddRecipe from './recipe/addrecipe';
 import RecipeListMain from './recipelistmain/recipelistmain';
+import Nav from './nav/nav';
 import CbBkContext from './ckbkcontext';
 import './App.css';
 
@@ -118,7 +119,7 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
         <CbBkContext.Provider value={contextValue}>
-
+        <Nav />
           <main>
             <Switch>
               <Route exact path="/" component={Homepage} />
