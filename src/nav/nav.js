@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBox from '../search/search';
 import CkBkContext from '../ckbkcontext';
@@ -22,11 +22,13 @@ class Nav extends Component {
                 <div className="mainLinks">
 
                 <Link to="/">My Dashboard</Link>
-                <Link to="/addrecipe">
-                    Add Recipe
-                </Link>
                 {isLoggedIn && (
-                    <Link to="/" onClick={this.handleLogout}>Logout</Link>
+                    <Fragment>
+                        <Link to="/addrecipe">
+                            Add Recipe
+                        </Link>
+                            <Link to="/" onClick={this.handleLogout}>Logout</Link>
+                    </Fragment>
                     )}
                 </div>
             </nav>

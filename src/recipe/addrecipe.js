@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import Nav from '../nav/nav';
+import React, { Component } from 'react';
 import RecipeService from './recipeservice';
 import CbCkContext from '../ckbkcontext';
 import config from '../config';
@@ -140,8 +139,6 @@ class AddRecipe extends Component {
 
     render() {
         return (
-            <Fragment>
-                <Nav />
                 <section>
                     <h1>New Recipe</h1>
                     <form className="addRecipe">
@@ -171,7 +168,6 @@ class AddRecipe extends Component {
                         </div>
                     </form>
                 </section>
-            </Fragment>
         )
     }
 }
