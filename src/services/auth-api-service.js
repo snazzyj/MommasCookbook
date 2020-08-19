@@ -22,7 +22,7 @@ const AuthApiService = {
     })
     },
     postUser(user) {
-      return fetch(`http://localhost:8000/api/auth/register`, {
+      return fetch(`${config.API_ENDPOINT}/auth/register`, {
         method: 'POST',
         headers: {
           'content-type' : 'application/json'
