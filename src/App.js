@@ -17,7 +17,7 @@ class App extends Component {
       user : {
         id: 0,
         firstName: '',
-        isLoggedIn: true,
+        isLoggedIn: false,
         recipeData: []
       },
       recipeSearchResults: []
