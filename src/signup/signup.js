@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AuthApiService from '../services/auth-api-service';
 import CkBkContext from '../ckbkcontext';
+import '../homepage/homepage.css'
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i); // eslint-disable-line
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -97,11 +98,13 @@ class SignUp extends Component {
     }
 
     render() {
+        const {errors, error} = this.state;
+        console.log(errors)
         return (
-            <section>
+            <section className="signup">
                 <h1>Sign Up</h1>
 
-                <form onSubmit={this.handleSignup}>
+                <form onSubmit={this.handleSignup} className="userSignup">
                     <label htmlFor="firstName">First Name
                         <input type="text" name="firstName" required />
                     </label>
@@ -112,11 +115,23 @@ class SignUp extends Component {
                         <input type="text" name="email" required onChange={this.handleEmail}/>
                     </label>
                     <label htmlFor="password">Password
-                        <input type="text" name="password" required onChange={this.handlePassword} />
+                        <input type="password" name="password" required onChange={this.handlePassword} />
                     </label>
 
                     <button>Sign Up</button>
                 </form>
+
+                <p> 
+                    <span>
+                        {errors.email}
+                    </span>
+                    <span>
+                        {errors.password}
+                    </span>
+                    <span>
+                        {error}
+                    </span>
+                </p>
             </section>
         )
     }

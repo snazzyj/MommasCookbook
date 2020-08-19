@@ -2,8 +2,8 @@ import React, {Component, Fragment} from 'react';
 import Profile from '../profile/profile';
 import Login from '../login/login';
 import SignUp from '../signup/signup';
-import SearchBox from '../search/search';
 import CkBkContext from '../ckbkcontext';
+import './homepage.css'
 
 class Homepage extends Component {
 
@@ -20,12 +20,11 @@ class Homepage extends Component {
                         <Profile />
                       </Fragment>
                     : <Fragment>
-                        <h1>Momma's Hidden Cookbook</h1>  
-                        <div>
+                        <h1 className="mainTitle">Momma's Hidden Cookbook</h1>  
+                        <div className="loginSignupBox">
                             <Login />
                             <SignUp />
                         </div>
-                        <SearchBox history={this.props.history} />
                       </Fragment>
                 }
             </Fragment>

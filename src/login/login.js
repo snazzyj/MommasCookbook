@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthApiService from '../services/auth-api-service';
 import CkBkContext from '../ckbkcontext';
+import '../homepage/homepage.css'
 
 class Login extends Component {
 
@@ -39,7 +40,7 @@ class Login extends Component {
             .catch(error => {
                 if (this._isMounted) {
                     this.setState({
-                        error
+                        error: error.error.message
                     })
                 }
 
@@ -48,19 +49,23 @@ class Login extends Component {
     }
 
     render() {
+        const {error} = this.state;
         return (
-            <section>
+            <section className="login">
                 <h1>Login</h1>
 
-                <form onSubmit={this.handleLogin}>
+                <form onSubmit={this.handleLogin} className="userLogin">
                     <label htmlFor="email">Email
                         <input name="email" type="email" required />
                     </label>
                     <label htmlFor="password">Password
-                        <input name="password" type="text" required />
+                        <input name="password" type="password" required />
                     </label>
                     <button>Login</button>
                 </form>
+                <p>
+                    {error}
+                </p>
             </section>
         )
     }

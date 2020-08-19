@@ -209,43 +209,50 @@ class Recipe extends Component {
                                     {renderDirections(recipe.directions)}
                                 </ul>
                             </div>
-
-                        </section>
-
-                        : 
-                        <section className="editRecipe">
-                            <label className="recipeName">Recipe Name
-                                <input className="recipeNameInput" defaultValue={recipe.recipe_name} onChange={this.updateRecipeName} />
-                            </label>
-
-                            <RecipeService.RecipeDetailsOnEdit
-                                prep={recipe.preptime}
-                                cook={recipe.cooktime}
-                                serving={recipe.servingsize}
-                                updatePrep={this.updatePrepTime}
-                                updateCook={this.updateCookTime}
-                                updateServing={this.updateServingSize}
-                            />
-                            <label className="ingredientsLabel">Ingredients
-                                <textarea defaultValue={recipe.ingredients} onChange={this.updateIngredients} />
-                            </label>
-
-                            <label className="directionsLabel">Directions
-                                <textarea defaultValue={recipe.directions} onChange={this.updateDirections}/>
-                            </label>
-
-                            <label className="recipeTagsLabel">Recipe Tags
-                                <textarea defaultValue={recipe.recipe_tags} onChange={this.updateTags} />
-                            </label>
-                        </section>
-                    }
-
-                    {!editing ?
+                            {!editing && 
                         <Fragment>
                             <button className="editBtn" onClick={this.toggleEditOn}>Edit</button>
                             <button className="deleteBtn" onClick={this.deleteRecipe}>Delete</button>
                         </Fragment>
-                        : <button className="saveBtn" onClick={this.toggleEditOff}>Save</button>
+                            }
+                        </section>
+
+                        : 
+                        <section className="editRecipe">
+                            <div className="top">
+
+                            <label className="recipeName">Recipe Name
+                                <input className="recipeNameInput" defaultValue={recipe.recipe_name} onChange={this.updateRecipeName} />
+                            </label>
+
+                            </div>
+                            <div className="leftInputs">
+                                <RecipeService.RecipeDetailsOnEdit
+                                    prep={recipe.preptime}
+                                    cook={recipe.cooktime}
+                                    serving={recipe.servingsize}
+                                    updatePrep={this.updatePrepTime}
+                                    updateCook={this.updateCookTime}
+                                    updateServing={this.updateServingSize}
+                                />
+                            </div>
+
+                            <div className="rightInputs">
+                                <label className="ingredientsLabel">Ingredients
+                                    <textarea defaultValue={recipe.ingredients} onChange={this.updateIngredients} />
+                                </label>
+
+                                <label className="directionsLabel">Directions
+                                    <textarea defaultValue={recipe.directions} onChange={this.updateDirections}/>
+                                </label>
+
+                                <label className="recipeTagsLabel">Recipe Tags
+                                    <textarea defaultValue={recipe.recipe_tags} onChange={this.updateTags} />
+                                </label>
+                            </div>
+
+                            {editing && <button className="saveBtn" onClick={this.toggleEditOff}>Save</button>}
+                        </section>
                     }
 
                     <p>

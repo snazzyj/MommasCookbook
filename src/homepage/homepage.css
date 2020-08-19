@@ -1,0 +1,52 @@
+.mainTitle {
+    font-size: 4em;
+}
+
+.loginSignupBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login, .signup {
+    min-width: 320px;
+    max-width: 320px;
+    min-height: 350px;
+    max-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0 20px;
+    text-align: left;
+    line-height: 25px;
+    background-color: white;
+}
+
+.login > h1, .signup > h1 {
+    text-align: center;
+}
+
+.userLogin, .userSignup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userLogin > label > input, .userSignup > label > input {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.login > p, .signup > p {
+    background-color: white;
+    font-size: 18px;
+}
+
+.signup > p > span {
+    display: block;
+}

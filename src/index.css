@@ -10,7 +10,7 @@ body {
   background: url('./assests/images/food-2879265_1920.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 html, body {

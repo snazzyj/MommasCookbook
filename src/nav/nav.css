@@ -3,6 +3,7 @@ nav {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -42,11 +43,12 @@ nav > h1 {
 .mainLinks {
     font-size: 20px;
     min-height: 45px;
-    color:white
+    color:white;
 }
 
 .mainLinks > a {
     margin: 0 10px;
+    text-decoration: none;
 }
 
 .mainLinks > a:visited {
@@ -55,4 +57,5 @@ nav > h1 {
 
 .mainLinks > a:hover {
     color: lightblue;
+    text-decoration: underline;
 }

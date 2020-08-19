@@ -144,10 +144,19 @@ class AddRecipe extends Component {
                     <form className="addRecipe">
 
                         <div className="mainContainer">
+                            <div className="top">
+
                             <label className="recipeName">
                                 <input className="recipeNameInput" onChange={this.setRecipeName} required placeholder="Recipe Title" />
                             </label>
+
+                            </div>
+                            <div className="leftInputs">
+
                             <RecipeService.RecipeDetails setPrepTime={this.setPrepTime} setCookTime={this.setCookTime} setServingSize={this.setServingSize} />
+                            </div>
+
+                            <div className="rightInputs">
 
                             <label className="ingredientsLabel">Ingredients
                                 <textarea onChange={this.handleIngredients} placeholder="Put each ingredient on its own line" required />
@@ -161,6 +170,7 @@ class AddRecipe extends Component {
                                 <textarea onChange={this.handleTags} placeholder="Add Tags to recipe..Seperated by a comma" required />
                             </label>
 
+                            </div>
                             <button type="submit" onClick={(e) => { this.handleClick(); this.handleSubmit(e) }}>
                                 {this.state.disabled ? 'Cooking your recipe up!' : 'Save It'}
                             </button>
